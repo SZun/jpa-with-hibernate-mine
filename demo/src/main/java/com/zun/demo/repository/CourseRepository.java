@@ -34,17 +34,10 @@ public class CourseRepository {
 
     public void playWithEntityManager(){
         Course course = new Course("Spring MVC");
+
         em.persist(course);
-        Course course2 = new Course("Angular in 50 steps");
-        em.persist(course2);
-        em.flush();
 
-        course.setName("Spring MVC Updated");
-        course.setName("Angular in 50 steps - Updated");
-
-        em.refresh(course);
-
-        em.flush();
-
+        Course course2 = findById(10001L);
+        course2.setName("JPA Updated");
     }
 }

@@ -11,11 +11,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = DemoApplication.class)
-class JPQLTest {
+class NativeQueryTest {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -23,21 +24,28 @@ class JPQLTest {
     private EntityManager em;
 
     @Test
+    void findAll() {
+        List res = em.createNativeQuery("select * from course", Course.class).getResultList();
+        logger.info("res -> {}", res);
+    }
+
+    @Test
     void findById() {
-        List res = em.createQuery("Select c from Course c").getResultList();
+        List res = em.createNativeQuery("select * from course where id = ?", Course.class)
+                .setParameter("id", 10001L).getResultList();
+
+//        List res = em.createNativeQuery("select * from course where id = :id", Course.class)
+//                .setParameter(1, 10001L).getResultList();
+
         logger.info("res -> {}", res);
     }
 
     @Test
-    void findByIdTyped() {
-        List res = em.createNamedQuery("query_get_all_courses", Course.class).getResultList();
-        logger.info("res -> {}", res);
-    }
-
-    @Test
-    void findByIdWhere() {
-        List res = em.createNamedQuery("query_get_100_step_courses", Course.class).getResultList();
-        logger.info("res -> {}", res);
+    @Transactional
+    void updateAll() {
+        int numRowsUpdate = em.createNativeQuery("Update Course set last_updated_date = sysdate()", Course.class)
+                .executeUpdate();
+        logger.info("res -> {}", numRowsUpdate);
     }
 
 }
