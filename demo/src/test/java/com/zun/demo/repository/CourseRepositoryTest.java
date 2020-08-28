@@ -31,4 +31,25 @@ class CourseRepositoryTest {
         repository.deleteById(10001L);
         assertNull(repository.findById(10001L));
     }
+
+    @Test
+    @DirtiesContext
+    void save() {
+        Course course = repository.findById(10001L);
+        assertEquals("JPA in 50 Steps", course.getName());
+
+        course.setName("JPA in 50 Steps - Updated");
+
+        repository.save(course);
+
+        course = repository.findById(10001L);
+        assertEquals("JPA in 50 Steps - Updated", course.getName());
+    }
+
+    @Test
+    @DirtiesContext
+    void playWithEntityManager(){
+        repository.playWithEntityManager();
+    }
+
 }
