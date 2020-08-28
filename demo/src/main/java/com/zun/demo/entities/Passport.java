@@ -1,9 +1,6 @@
 package com.zun.demo.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Passport {
@@ -15,6 +12,9 @@ public class Passport {
     @Column(nullable = false)
     private String name;
 
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "passport")
+    private Student student;
+
     protected Passport(){}
 
     public Passport(String name) {
@@ -23,6 +23,14 @@ public class Passport {
 
     public Long getId() {
         return id;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     public String getName() {
