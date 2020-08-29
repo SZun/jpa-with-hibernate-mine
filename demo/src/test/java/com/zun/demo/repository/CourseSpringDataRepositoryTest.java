@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -71,4 +72,10 @@ class CourseSpringDataRepositoryTest {
         Page<Course> secondPage = repository.findAll(secondPageable);
         logger.info("Second Page Content -> {}", secondPage.getContent());
     }
+
+    @Test
+    void findByName(){
+        List<Course> courses = repository.findByName("JPA in 50 Steps");
+    }
+
 }
