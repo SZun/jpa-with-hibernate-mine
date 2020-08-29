@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -71,7 +72,7 @@ class CourseRepositoryTest {
     }
 
     @Test
-    @Transactional(isolation = )
+    @Transactional(isolation = Isolation.DEFAULT)
     void retrieveCourseForReview(){
         Review review = em.find(Review.class, 50001L);
         logger.info("{}", review.getCourse());
