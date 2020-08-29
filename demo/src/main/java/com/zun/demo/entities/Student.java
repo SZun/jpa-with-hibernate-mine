@@ -1,6 +1,8 @@
 package com.zun.demo.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Student {
@@ -14,6 +16,9 @@ public class Student {
 
     @OneToOne(fetch = FetchType.LAZY)
     private Passport passport;
+
+    @ManyToMany
+    private List<Course> courses = new ArrayList<>();
 
     protected Student(){}
 
@@ -39,6 +44,14 @@ public class Student {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void addCourse(Course course) {
+        courses.add(course);
     }
 
     @Override

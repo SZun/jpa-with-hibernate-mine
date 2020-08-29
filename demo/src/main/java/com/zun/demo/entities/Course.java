@@ -12,8 +12,8 @@ import java.util.List;
 //@Table(name = "CourseDetails")
 @NamedQueries(
         value = {
-                @NamedQuery(name="query_get_all_courses", query = "Select c from Course c"),
-                @NamedQuery(name="query_get_100_step_courses", query = "Select c from Course c where name like '%100 Steps'")
+                @NamedQuery(name = "query_get_all_courses", query = "Select c from Course c"),
+                @NamedQuery(name = "query_get_100_step_courses", query = "Select c from Course c where name like '%100 Steps'")
         }
 )
 public class Course {
@@ -33,9 +33,17 @@ public class Course {
     private LocalDateTime createdDate;
 
     @OneToMany(mappedBy = "course")
-    List<Review> reviews = new ArrayList<>();
+    private List<Review> reviews = new ArrayList<>();
 
-    protected Course(){}
+    @ManyToMany(mappedBy = "courses")
+    @JoinTable(name = "STUDENT_COURSE",
+            joinColumns = @JoinColumn(name = "STUDENT_ID"),
+            inverseJoinColumns = @JoinColumn(name = "COURSE_ID")
+    )
+    private List<Student> students = new ArrayList<>();
+
+    protected Course() {
+    }
 
     public Course(String name) {
         this.name = name;
@@ -63,6 +71,14 @@ public class Course {
 
     public void removeReview(Review review) {
         reviews.remove(review);
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void addStudent(Student student) {
+        students.add(student);
     }
 
     @Override
