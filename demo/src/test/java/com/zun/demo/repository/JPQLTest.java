@@ -59,4 +59,25 @@ class JPQLTest {
         logger.info("res -> {}", res);
     }
 
+    @Test
+    void selectStudentsCoursesJoin(){
+        List<Object[]> res = em.createQuery("Select c,s from Course c JOIN c.students s").getResultList();
+        logger.info("res.size() -> {}", res.size());
+        res.forEach(i -> logger.info("Course{} Student{}", i[0], i[1]));
+    }
+
+    @Test
+    void selectStudentsCoursesLeftJoin(){
+        List<Object[]> res = em.createQuery("Select c,s from Course c LEFT JOIN c.students s").getResultList();
+        logger.info("res.size() -> {}", res.size());
+        res.forEach(i -> logger.info("Course{} Student{}", i[0], i[1]));
+    }
+
+    @Test
+    void selectStudentsCoursesCrossJoin(){
+        List<Object[]> res = em.createQuery("Select c,s from Course c, Student s").getResultList();
+        logger.info("res.size() -> {}", res.size());
+        res.forEach(i -> logger.info("Course{} Student{}", i[0], i[1]));
+    }
+
 }
