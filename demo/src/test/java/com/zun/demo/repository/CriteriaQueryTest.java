@@ -86,17 +86,4 @@ class CriteriaQueryTest {
         logger.info("Courses -> {}", courses);
     }
 
-    @Test
-    void leftJoin() {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Course> cq = cb.createQuery(Course.class);
-
-        Root<Course> courseRoot = cq.from(Course.class);
-
-        courseRoot.join("students", JoinType.);
-
-        List<Course> courses = em.createQuery(cq.select(courseRoot)).getResultList();
-        logger.info("Courses -> {}", courses);
-    }
-
 }
