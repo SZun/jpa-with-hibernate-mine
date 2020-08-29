@@ -1,7 +1,9 @@
 package com.zun.demo.entities;
 
+import javax.persistence.Entity;
 import java.math.BigDecimal;
 
+@Entity
 public class FullTimeEmployee extends Employee {
 
     private BigDecimal salary;
