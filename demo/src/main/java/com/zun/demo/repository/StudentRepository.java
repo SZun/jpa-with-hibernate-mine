@@ -1,5 +1,6 @@
 package com.zun.demo.repository;
 
+import com.zun.demo.entities.Course;
 import com.zun.demo.entities.Passport;
 import com.zun.demo.entities.Student;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.util.stream.Stream;
 
 @Repository
 @Transactional
@@ -40,4 +42,22 @@ public class StudentRepository {
         student.setPassport(passport);
         em.persist(student);
     }
+
+    public void insertHardcodedStudentAndCourse(){
+        Student student = new Student("Jack");
+        Course course = new Course("Microservices in 100 Steps");
+
+        Stream.of(student, course).forEach(em::persist);
+
+        student.addCourse(course);
+        course.addStudent(student);
+        em.persist(student);
+    }
+
+    public void insertStudentAndCourse(Student student, Course course){
+        student.addCourse(course);
+        course.addStudent(student);
+        Stream.of(student, course).forEach(em::persist);
+    }
+
 }

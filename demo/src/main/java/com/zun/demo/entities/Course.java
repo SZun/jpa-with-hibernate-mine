@@ -36,10 +36,10 @@ public class Course {
     private List<Review> reviews = new ArrayList<>();
 
     @ManyToMany(mappedBy = "courses")
-    @JoinTable(name = "STUDENT_COURSE",
-            joinColumns = @JoinColumn(name = "STUDENT_ID"),
-            inverseJoinColumns = @JoinColumn(name = "COURSE_ID")
-    )
+//    @JoinTable(name = "STUDENT_COURSES",
+//            joinColumns = @JoinColumn(name = "STUDENTS_ID"),
+//            inverseJoinColumns = @JoinColumn(name = "COURSES_ID")
+//    )
     private List<Student> students = new ArrayList<>();
 
     protected Course() {
