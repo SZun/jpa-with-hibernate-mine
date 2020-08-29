@@ -1,6 +1,19 @@
-insert into course(id, name, created_date, last_updated_date) values(10001, 'JPA in 50 Steps', sysdate(), sysdate());
-insert into course(id, name, created_date, last_updated_date) values(10002, 'Spring in 50 Steps', sysdate(), sysdate());
-insert into course(id, name, created_date, last_updated_date) values(10003, 'Spring Boot in 100 Steps', sysdate(), sysdate());
+insert into course(id, name, created_date, last_updated_date)
+values(10001, 'JPA in 50 Steps', sysdate(), sysdate());
+insert into course(id, name, created_date, last_updated_date)
+values(10002, 'Spring in 50 Steps', sysdate(), sysdate());
+insert into course(id, name, created_date, last_updated_date)
+values(10003, 'Spring Boot in 100 Steps', sysdate(), sysdate());
+insert into course(id, name, created_date, last_updated_date)
+values(10004, 'Dummy1', sysdate(), sysdate());
+insert into course(id, name, created_date, last_updated_date)
+values(10005, 'Dummy2', sysdate(), sysdate());
+insert into course(id, name, created_date, last_updated_date)
+values(10006, 'Dummy3', sysdate(), sysdate());
+insert into course(id, name, created_date, last_updated_date)
+values(10007, 'Dummy4', sysdate(), sysdate());
+insert into course(id, name, created_date, last_updated_date)
+values(10008, 'Dummy5', sysdate(), sysdate());
 
 insert into passport(id, name) values(40001,'E123456');
 insert into passport(id, name) values(40002,'N123457');
