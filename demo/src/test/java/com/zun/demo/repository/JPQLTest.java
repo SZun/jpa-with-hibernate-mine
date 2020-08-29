@@ -2,6 +2,7 @@ package com.zun.demo.repository;
 
 import com.zun.demo.DemoApplication;
 import com.zun.demo.entities.Course;
+import com.zun.demo.entities.Student;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
@@ -37,6 +38,24 @@ class JPQLTest {
     @Test
     void findByIdWhere() {
         List res = em.createNamedQuery("query_get_100_step_courses", Course.class).getResultList();
+        logger.info("res -> {}", res);
+    }
+
+    @Test
+    void coursesWithoutStudents(){
+       List res = em.createQuery("select c from Courses c where c.students is empty", Course.class).getResultList();
+       logger.info("res -> {}", res);
+    }
+
+    @Test
+    void coursesWithOrderedByStudents(){
+        List res = em.createQuery("select c from Courses c ordered by size(c.students) desc", Course.class).getResultList();
+        logger.info("res -> {}", res);
+    }
+
+    @Test
+    void studentPassportLike1234(){
+        List res = em.createQuery("select s from Students s where s.passport.number like '%1234%'", Student.class).getResultList();
         logger.info("res -> {}", res);
     }
 

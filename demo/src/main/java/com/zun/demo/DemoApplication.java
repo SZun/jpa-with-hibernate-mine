@@ -1,7 +1,5 @@
 package com.zun.demo;
 
-import com.zun.demo.entities.FullTimeEmployee;
-import com.zun.demo.entities.PartTimeEmployee;
 import com.zun.demo.repository.CourseRepository;
 import com.zun.demo.repository.EmployeeRepository;
 import com.zun.demo.repository.StudentRepository;
@@ -11,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.math.BigDecimal;
 
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
@@ -34,9 +30,6 @@ public class DemoApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        employeeRepository.insert(new PartTimeEmployee("Jill", new BigDecimal(50)));
-        employeeRepository.insert(new FullTimeEmployee("Jack", new BigDecimal(10000)));
-        logger.info("All Part Time Employees {} ->", employeeRepository.retrieveAllPartTimeEmployees());
-        logger.info("All Full Time Employees {} ->", employeeRepository.retrieveAllFullTimeEmployee());
+
     }
 }
