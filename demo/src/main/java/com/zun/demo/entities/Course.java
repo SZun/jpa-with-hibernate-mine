@@ -18,6 +18,7 @@ import java.util.List;
 @NamedQueries(
         value = {
                 @NamedQuery(name = "query_get_all_courses", query = "Select c from Course c"),
+                @NamedQuery(name = "query_get_all_courses_with_join_fetch", query = "Select c from Course c JOIN FETCH c.students"),
                 @NamedQuery(name = "query_get_100_step_courses", query = "Select c from Course c where name like '%100 Steps'")
         }
 )
