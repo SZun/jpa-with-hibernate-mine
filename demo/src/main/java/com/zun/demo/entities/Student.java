@@ -1,5 +1,6 @@
 package com.zun.demo.entities;
 
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,8 @@ public class Student {
     @ManyToMany
     private List<Course> courses = new ArrayList<>();
 
+    private Address address;
+
     protected Student(){}
 
     public Student(String name) {
@@ -28,6 +31,14 @@ public class Student {
 
     public Long getId() {
         return id;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public Passport getPassport() {

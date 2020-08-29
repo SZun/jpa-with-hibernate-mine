@@ -1,6 +1,7 @@
 package com.zun.demo.repository;
 
 import com.zun.demo.DemoApplication;
+import com.zun.demo.entities.Address;
 import com.zun.demo.entities.Passport;
 import com.zun.demo.entities.Student;
 import org.junit.jupiter.api.Test;
@@ -46,6 +47,16 @@ class StudentRepositoryTest {
     @Transactional
     public void retrieveStudentAndCourse(){
         Student student = em.find(Student.class, 20001L);
+        logger.info("student -> {}", student);
+        logger.info("course -> {}", student.getCourses());
+    }
+
+    @Test
+    @Transactional
+    public void setAddressDetails(){
+        Student student = em.find(Student.class, 20001L);
+        student.setAddress(new Address("No 101", "Some Street", "Hyderabad"));
+        em.flush();
         logger.info("student -> {}", student);
         logger.info("course -> {}", student.getCourses());
     }

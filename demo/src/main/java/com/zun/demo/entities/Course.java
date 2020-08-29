@@ -2,7 +2,11 @@ package com.zun.demo.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Where;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -18,7 +22,11 @@ import java.util.List;
         }
 )
 @Cacheable
+@SQLDelete(sql= "update course set is_deleted = true where id = ?")
+@Where(clause = "is_deleted = false")
 public class Course {
+
+    final static Logger LOGGER = LoggerFactory.getLogger(Course.class);
 
     @Id
     @GeneratedValue
@@ -45,11 +53,19 @@ public class Course {
 //    )
     private List<Student> students = new ArrayList<>();
 
+    private boolean isDeleted;
+
     protected Course() {
     }
 
     public Course(String name) {
         this.name = name;
+    }
+
+    @PreRemove
+    private void preRemove(){
+        LOGGER.info("Setting is deleted to true");
+        isDeleted = true;
     }
 
     public Long getId() {

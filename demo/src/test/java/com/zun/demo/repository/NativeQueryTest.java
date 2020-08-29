@@ -25,7 +25,7 @@ class NativeQueryTest {
 
     @Test
     void findAll() {
-        List res = em.createNativeQuery("select * from course", Course.class).getResultList();
+        List res = em.createNativeQuery("select * from course where is_deleted = 0", Course.class).getResultList();
         logger.info("res -> {}", res);
     }
 
